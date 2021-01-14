@@ -1,60 +1,29 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app id="app">
+    <ShoppiesHeader></ShoppiesHeader>
+    <v-main id="scrolling-techniques" class="overflow-y-auto">
+            <router-view></router-view>
+          </v-main>
+        </v-app>
+      </template>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <script>
 
-      <v-spacer></v-spacer>
+      import ShoppiesHeader from "@/movieAward/components/ShoppiesHeader";
+      export default {
+        name: 'App',
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        components: {
+          ShoppiesHeader
+        },
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
-</template>
-
-<script>
-import HelloWorld from './components/HelloWorld';
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
-</script>
+        data: () => ({
+          //
+        }),
+      };
+      </script>
+      <style>
+      .search-no-border.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot{
+        box-shadow: none !important;
+      }
+      </style>
