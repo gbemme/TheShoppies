@@ -48,7 +48,7 @@ name: "ShoppieHomeWrapper",
       let key = 'b800764b'
       console.log('hi')
       console.log(movieName)
-      fetch(`http://www.omdbapi.com/?s=${movieName}&apikey=`+ key)
+      fetch(`https://www.omdbapi.com/?s=${movieName}&apikey=`+ key)
           .then(res=>res.clone().json())
           .then( json =>{
                 console.log(json)
