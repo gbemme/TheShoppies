@@ -6,7 +6,7 @@
          Movie Name : {{movie}}
        </v-card-title>
        <v-card-actions>
-         <v-btn @click="$emit('removeCard',movie)" depressed color="red" class="white--text" large>
+         <v-btn @click="$emit('removeCard',movie,i)" depressed color="red" class="white--text" large>
            Remove
          </v-btn>
        </v-card-actions>

@@ -43,6 +43,14 @@ name: "ShoppieHomeWrapper",
           Title:'Silicon Valley'
         },
       ],
+      items:[ {
+        Poster: 'https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_SX300.jpg',
+        Title:'Star Wars'
+      },
+        {
+          Poster: 'https://m.media-amazon.com/images/M/MV5BNDc2NTE0NzE4N15BMl5BanBnXkFtZTgwMDQ5MzgwMzE@._V1_SX300.jpg',
+          Title:'Silicon Valley'
+        }],
       nominationList:[],
       height:800,
       show:false,
@@ -56,7 +64,8 @@ name: "ShoppieHomeWrapper",
       fetch(`https://www.omdbapi.com/?s=${movieName}&apikey=`+ key)
           .then(res=>res.clone().json())
           .then( json =>{
-                this.moviesData = json.Search
+              this.moviesData = json.Search
+
           }
 
           )
@@ -67,6 +76,7 @@ name: "ShoppieHomeWrapper",
         this.counter++
         if(!this.nominationList.includes(movie)){
           this.nominationList.push(movie)
+          localStorage.setItem('nominationList',Object.assign({},this.nominationList))
         }
 
       }
@@ -81,7 +91,15 @@ name: "ShoppieHomeWrapper",
         this.counter--
       }
     }
-  }
+  },
+  watch:{
+    moviesData:function (val){
+      if (val === undefined){
+        console.log(val)
+        this.moviesData = this.items
+      }
+    }
+  },
 }
 </script>
 
