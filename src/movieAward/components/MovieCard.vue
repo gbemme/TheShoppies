@@ -31,7 +31,7 @@
               </v-card-title>
               <v-card-text>Please copy the link to share the link to this movie
                 <br>
-                <small class="blue--text" v-text="$router.currentRoute.path +' '+movie.Title"></small>
+                <small class="blue--text" v-text="$route.path +' '+movie.Title"></small>
               </v-card-text>
 
             </v-card>
