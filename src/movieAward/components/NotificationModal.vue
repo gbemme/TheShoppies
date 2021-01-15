@@ -6,7 +6,7 @@
         width="487px"
     >
       <v-card  class="container align-center pa-0">
-        <h4 class="font-weight-bold title"> ⚠️</h4>
+        <h4 class="font-weight-bold title mt-4"> ⚠️</h4>
         <br>
         <h2  class="title font-weight-bold"> Exceeded Nominations</h2>
         <br>

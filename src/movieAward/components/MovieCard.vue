@@ -13,7 +13,6 @@
           <v-btn depressed color="black" class="white--text" large id="nominate" @click="$emit('count',movie.Title)" :disabled="NominationList.includes(movie.Title)">
             Nominate
           </v-btn>
-      <!--    <p class="mt-4">⭐<span>movies.imdbRating</span></p>-->
           <v-icon>mdi-share-variant </v-icon>
 
         </div>
@@ -43,17 +42,7 @@ name: "MovieCard",
       }
 
   },
-  methods:{
-    onClickButton(){
-      if(this.counter<5){
-        this.counter++
-        this.display=true
-      }
-      else {
-        this.exceeded=true
-      }
-    }
-  }
+
 }
 </script>
 

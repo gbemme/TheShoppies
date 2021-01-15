@@ -35,17 +35,7 @@ name: "NominationCard",
       }
 
   },
-  methods:{
-    onClickButton(){
-      if(this.counter<5){
-        this.counter++
-        this.display=true
-      }
-      else {
-        this.exceeded=true
-      }
-    }
-  }
+
 }
 </script>
 
@@ -54,8 +44,6 @@ name: "NominationCard",
   background: #F9F5FC;
   transform: rotate(0.1deg);
   width: 350px;
-  /*height: 3.31px;*/
-  /*margin-top: 15px;*/
 }
 .title{
   font-size: 20px;

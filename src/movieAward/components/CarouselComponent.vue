@@ -1,14 +1,5 @@
 <template>
 <div>
-  <v-skeleton-loader
-      v-if="getLoadingState"
-      min-height="80vh"
-      max-height="80vh"
-      height="80vh"
-      type="card,card-heading,text@5"
-      class="mt-15"
-  >
-  </v-skeleton-loader>
   <v-carousel hide-delimiters :height="height" interval="60">
     <v-carousel-item
         v-for="(item,i) in items"
@@ -43,15 +34,7 @@ name: "CarouselComponent",
         return item.Poster
       }
     },
-    getLoadingState(){
-      if (this.items===undefined || this.items.length===0){
-        return true
-      }
-      else{
-        return false
-      }
 
-    }
   }
 }
 </script>
