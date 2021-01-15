@@ -1,5 +1,14 @@
 <template>
 <div>
+  <v-skeleton-loader
+      v-if="getLoadingState"
+      min-height="80vh"
+      max-height="80vh"
+      height="80vh"
+      type="card,card-heading,text@5"
+      class="mt-15"
+  >
+  </v-skeleton-loader>
   <v-carousel hide-delimiters :height="height" interval="60">
     <v-carousel-item
         v-for="(item,i) in items"
@@ -11,11 +20,6 @@
           <br>
           <div class="d-flex justify-lg-space-between" >
             <p style="margin-top: 10px" v-text="item.Year"></p>
-            <v-btn class="nominate-btn" depressed color="white" large>
-              Nominate
-
-            </v-btn>
-
           </div>
         </v-row>
     </v-carousel-item>
@@ -38,6 +42,15 @@ name: "CarouselComponent",
       else{
         return item.Poster
       }
+    },
+    getLoadingState(){
+      if (this.items===undefined || this.items.length===0){
+        return true
+      }
+      else{
+        return false
+      }
+
     }
   }
 }

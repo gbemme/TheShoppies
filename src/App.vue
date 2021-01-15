@@ -23,7 +23,13 @@
       };
       </script>
       <style>
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap');
+
+
       .search-no-border.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot{
         box-shadow: none !important;
+      }
+      *{
+        font-family: 'Manrope', sans-serif;
       }
       </style>

@@ -1,20 +1,22 @@
 <template>
-<div  class="container" >
-<!--  <div class="assigned">-->
-  <NotificationModal @remove="display=false" :display="display"></NotificationModal>
-  <v-row>
-    <v-col>
-  <div>
-    <v-img :src="getImage(movies)" height="240px"></v-img>
-  </div>
-  <div class="d-flex justify-space-around mt-5">
-    <v-btn depressed color="black" class="white--text" large @click="$emit('count')" :disabled="counter===5">
-      Nominate
-    </v-btn>
-    <p>⭐</p>
-    <v-icon>mdi-share-variant </v-icon>
+<div>
+  <v-row class="row-container">
+    <v-col  class="container"  v-for="(movie,i) in movies" :key="i">
+        <div>
+          <v-img :src="getImage(movie)" height="200px"></v-img>
+        </div>
+         <div class="d-flex title font-weight-bold justify-space-around mt-5" >
+           <p v-text="movie.Title"></p>
+           <p v-text="movie.Year"></p>
+         </div>
+        <div class="d-flex justify-space-around mt-3">
+          <v-btn depressed color="black" class="white--text" large id="nominate" @click="$emit('count',movie.Title)" :disabled="NominationList.includes(movie.Title)">
+            Nominate
+          </v-btn>
+      <!--    <p class="mt-4">⭐<span>movies.imdbRating</span></p>-->
+          <v-icon>mdi-share-variant </v-icon>
 
-  </div>
+        </div>
     </v-col>
   </v-row>
   </div>
@@ -22,20 +24,13 @@
 </template>
 
 <script>
-import NotificationModal from "@/movieAward/components/NotificationModal";
 export default {
 name: "MovieCard",
-  components: {NotificationModal},
   props:{
-    movies:Object
-  },
-  data(){
-    return{
-      counter:0,
-      exceeded:false,
-      display:false
-
-    }
+    movies:Array,
+    display:Boolean,
+    counter:Number,
+    NominationList:Array
   },
     computed:{
       getImage:()=>(item)=>{
@@ -66,9 +61,17 @@ name: "MovieCard",
 .container{
   background: #F9F5FC;
   transform: rotate(0.1deg);
-  width: 250px;
-  height: 346.31px;
-  margin-top: 15px;
+  width: 230px;
+  /*height: 3.31px;*/
+  /*margin-top: 15px;*/
+  margin: 20px;
+}
+.title{
+  font-size: 20px;
+}
+.row-container{
+  min-width: 65%;
+  width: 70%;
 }
 
 

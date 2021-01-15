@@ -1,15 +1,20 @@
 <template>
-  <div>
+  <div style="overflow-y: hidden">
+    <NotificationModal @remove="display=false" :display="display"></NotificationModal>
     <CarouselComponent :height="height" :items="moviesData"></CarouselComponent>
     <SearchComponent  @check="getMovies"></SearchComponent>
-    <div class="assigned ">
-    <v-row v-if="show" class="mx-auto" align-content="center" justify="center"  style="position: absolute;" >
-      <v-col v-for="(movie,i) in moviesData" :key="i">
-        <MovieCard @count="onClickButton" :movies="movie"></MovieCard>
-      </v-col>
+    <div class="d-flex mx-auto justify-space-between"  v-if="show" >
+        <div class="div-container">
+          <p class="ml-8 justify-center align-center">Movies Search Results</p>
+        <MovieCard :nomination-list="nominationList" :counter="counter" @count="onClickButton" :movies="moviesData"></MovieCard>
+        </div>
+      <div class="div-container">
+        <p class="align-center justify-center">Your Nominations</p>
+      <NominationCard @removeCard="removeNomination" :nomination-list="nominationList"></NominationCard>
+      </div>
 
-    </v-row>
-    </div>
+
+  </div>
   </div>
 
 </template>
@@ -18,13 +23,14 @@
 import CarouselComponent from "@/movieAward/components/CarouselComponent";
 import SearchComponent from "@/movieAward/components/SearchComponent";
 import MovieCard from '@/movieAward/components/MovieCard'
+import NotificationModal from "@/movieAward/components/NotificationModal";
+import NominationCard from "@/movieAward/components/NominationCard";
 export default {
 name: "ShoppieHomeWrapper",
-  components: {SearchComponent, CarouselComponent,MovieCard},
+  components: {NominationCard, NotificationModal, SearchComponent, CarouselComponent,MovieCard},
   data(){
     return{
       counter:0,
-      exceeded:false,
       display:false,
 
       moviesData:[
@@ -37,6 +43,7 @@ name: "ShoppieHomeWrapper",
           Title:'Silicon Valley'
         },
       ],
+      nominationList:[],
       height:800,
       show:false,
     }
@@ -46,27 +53,32 @@ name: "ShoppieHomeWrapper",
       this.height=500;
       this.show = true
       let key = 'b800764b'
-      console.log('hi')
-      console.log(movieName)
       fetch(`https://www.omdbapi.com/?s=${movieName}&apikey=`+ key)
           .then(res=>res.clone().json())
           .then( json =>{
-                console.log(json)
                 this.moviesData = json.Search
           }
 
           )
           .catch((error)=>{ console.log(error)});
     },
-    onClickButton(){
+    onClickButton(movie){
       if(this.counter<5){
         this.counter++
-        this.display=true
-        alert(this.counter)
+        if(!this.nominationList.includes(movie)){
+          this.nominationList.push(movie)
+        }
+
       }
       else {
-        this.exceeded=true
-        alert(this.counter)
+        this.display=true
+      }
+    },
+    removeNomination(movie){
+      let movieIndex = this.nominationList.indexOf(movie)
+      if(movieIndex >-1 && this.counter>0){
+        this.nominationList.splice(movieIndex,1)
+        this.counter--
       }
     }
   }
@@ -74,22 +86,15 @@ name: "ShoppieHomeWrapper",
 </script>
 
 <style scoped>
-.assigned {
-  /*min-width: 10px;*/
-  /*display: flex;*/
-  overflow-x: auto;
-  max-width: 10% !important;
-}
-/*.assigned::-webkit-scrollbar {*/
-/*  background: transparent !important;*/
-/*  width: 2px;*/
-/*  max-height: 3px !important;*/
-/*}*/
-/*.assigned::-webkit-scrollbar-thumb {*/
-/*  background: rgba(43, 28, 28, 0.5);*/
-/*  max-height: 5px !important;*/
-/*  max-width: 20px !important;*/
-/*  border-radius: 6px;*/
-/*}*/
+.div-container{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
 
+  color: #000000;
+}
+.wrapper{
+  width: 50%;
+  justify-content: space-between;
+}
 </style>

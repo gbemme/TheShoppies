@@ -1,30 +1,31 @@
 <template>
-<div>
-  <v-dialog
-      transition="dialog-top-transition"
-      max-width="600"
-      height
-      hide-overlay
-      v-model="display"
-  >
-      <v-card class="container align-center justify-center">
-        <v-card-title>Nominate  Movie</v-card-title>
-        <v-card-text>
-          <p>You have successfully Nominate </p>
-          <h4>Superman</h4>
-        </v-card-text>
+  <v-row justify="center">
+    <v-dialog
+        v-model="display"
+        persistent
+        width="487px"
+    >
+      <v-card  class="container align-center pa-0">
+        <h4 class="font-weight-bold title"> ⚠️</h4>
+        <br>
+        <h2  class="title font-weight-bold"> Exceeded Nominations</h2>
+        <br>
+        <v-card-text class="text">You can no longer nominate a movie you had only <br> 5 movie chances and you have exceeded all chances</v-card-text>
         <v-card-actions>
+          <v-spacer></v-spacer>
           <v-btn
-              color="black"
-              depressed
+              color="red"
+              outlined
               x-large
-              class="white--text"
+              class="mr-3"
               @click="$emit('remove')"
-          >Close</v-btn>
+          >
+            Cancel
+          </v-btn>
         </v-card-actions>
       </v-card>
-  </v-dialog>
-</div>
+    </v-dialog>
+  </v-row>
 </template>
 
 <script>
@@ -38,11 +39,20 @@ name: "NotificationModal",
 
 <style scoped>
 .container{
-  width: 400px;
-  height: 400px;
-  background: #ffff;
+  background: #FFFFFF;
   /*box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.33);*/
   border-radius: 16px;
+  overflow-x: hidden;
+}
+.title{
+  font-size: 30px;
+  margin-left: 17px;
+}
+
+.text{
+  font-weight: normal;
+  font-size: 16px;
+  margin-left: 5px;
 }
 
 </style>
