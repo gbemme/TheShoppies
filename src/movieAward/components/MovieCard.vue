@@ -13,7 +13,29 @@
           <v-btn depressed color="black" class="white--text" large id="nominate" @click="$emit('count',movie.Title)" :disabled="NominationList.includes(movie.Title)">
             Nominate
           </v-btn>
-          <v-icon>mdi-share-variant </v-icon>
+          <v-dialog
+              v-model="dialog"
+              max-width="350"
+              hide-overlay
+          >
+            <template v-slot:activator="{ on, attrs }">
+            <v-icon   v-bind="attrs"
+                      v-on="on" @click="dialog=true">mdi-share-variant </v-icon>
+            </template>
+
+            <v-card>
+              <v-card-title class="font-weight-bold" style="background-color: #FFFFFF">
+                Share Movie Link
+                <br>
+                <br>
+              </v-card-title>
+              <v-card-text>Please copy the link to share the link to this movie
+                <br>
+                <small class="blue--text" v-text="$router.currentRoute.path +' '+movie.Title"></small>
+              </v-card-text>
+
+            </v-card>
+          </v-dialog>
 
         </div>
     </v-col>
@@ -31,6 +53,11 @@ name: "MovieCard",
     counter:Number,
     NominationList:Array
   },
+  data(){
+    return{
+      dialog:false
+    }
+  },
     computed:{
       getImage:()=>(item)=>{
         if(item.Poster==='N/A'){
@@ -39,7 +66,11 @@ name: "MovieCard",
         else{
           return item.Poster
         }
+      },
+      getLink:()=>(movieName)=>{
+        return self.$router.currentRoute.path +''+movieName
       }
+
 
   },
 

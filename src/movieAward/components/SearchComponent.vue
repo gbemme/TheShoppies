@@ -21,6 +21,7 @@ name: "SearchComponent",
   return{movieName:''}
   },
 
+
 }
 </script>
 
